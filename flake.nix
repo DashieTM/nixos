@@ -27,7 +27,7 @@
       "marmo"
       "overheating"
       "spaceship"
-    ] ./hosts/.) // {
+    ] ./.) // {
       server = inputs.stable.lib.nixosSystem {
         specialArgs = {
           inherit inputs;

@@ -1,14 +1,16 @@
-{ config, ... }: {
-  imports = [ ../../modules ];
+{ config, ... }:
+{
+  imports = [ ../../common ];
   conf = {
     monitor = "eDP-1";
     scale = "2.0";
-    hostname = "overheating";
     boot_params = [ "rtc_cmos.use_acpi_alarm=1" ];
-    ironbar.modules = [{
-      type = "upower";
-      class = "memory-usage";
-    }];
+    ironbar.modules = [
+      {
+        type = "upower";
+        class = "memory-usage";
+      }
+    ];
   };
   mods = {
     stylix.colorscheme = "catppuccin-mocha";
@@ -22,11 +24,13 @@
       ];
       extra_autostart = [ "hyprdock --server" ];
     };
-    amdgpu.enable = true;
+    gpu.amdgpu.enable = true;
     kde_connect.enable = true;
     bluetooth.enable = true;
     acpid.enable = true;
-    greetd = { resolution = "3440x1440@180"; };
+    greetd = {
+      resolution = "3440x1440@180";
+    };
     nextcloud = {
       synclist = [
         {

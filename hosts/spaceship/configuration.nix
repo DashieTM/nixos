@@ -1,19 +1,29 @@
-{ config, inputs', ... }:
-let username = config.conf.username;
-in {
-  # imports = [ inputs'.dashNix.modules ];
+{
+  config,
+  inputs',
+  lib,
+  ...
+}:
+let
+  username = config.conf.username;
+in
+{
+  imports = [ ../../common ];
 
   # config variables
   conf = {
     monitor = "DP-1";
     streamdeck.enable = false;
-    hostname = "spaceship";
   };
   mods = {
     # f to pay respect
     teams.enable = true;
-    coding = { jetbrains = true; };
-    gaming = { enable = true; };
+    coding = {
+      jetbrains = true;
+    };
+    gaming = {
+      enable = true;
+    };
     stylix.colorscheme = "catppuccin-mocha";
     hyprland = {
       no_atomic = true;
@@ -60,25 +70,35 @@ in {
       '';
       extra_autostart = [ "flatpak run com.core447.StreamController -b" ];
     };
-    extraDrives = [{
-      name = "drive2";
-      drive = {
-        device = "/dev/disk/by-label/DRIVE2";
-        fsType = "ext4";
-        options = [ "noatime" "nodiratime" "discard" ];
-      };
-    }];
+    drives.extraDrives = [
+      {
+        name = "drive2";
+        drive = {
+          device = "/dev/disk/by-label/DRIVE2";
+          fsType = "ext4";
+          options = [
+            "noatime"
+            "nodiratime"
+            "discard"
+          ];
+        };
+      }
+    ];
     virtualbox.enable = true;
     kde_connect.enable = true;
     xone.enable = true;
-    amdgpu.enable = true;
+    gpu = {
+      amdgpu.enable = true;
+      vapi = {
+        enable = true;
+        rocm.enable = true;
+      };
+    };
     piper.enable = true;
     flatpak.additional_packages = [ "com.core447.StreamController" ];
-    vapi = {
-      enable = true;
-      rocm.enable = true;
+    greetd = {
+      resolution = "3440x1440@180";
     };
-    greetd = { resolution = "3440x1440@180"; };
     nextcloud = {
       synclist = [
         {

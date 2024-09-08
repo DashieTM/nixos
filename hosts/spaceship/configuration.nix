@@ -1,29 +1,21 @@
-{
-  config,
-  inputs',
-  lib,
-  ...
-}:
-let
-  username = config.conf.username;
-in
-{
+{ config, pkgs, ... }:
+let username = config.conf.username;
+in {
   imports = [ ../../common ];
 
   # config variables
   conf = {
-    monitor = "DP-1";
+    defaultMonitor = "DP-1";
+    defaultMonitorMode = "3440x1440@180";
+    defaultMonitorScale = "1";
     streamdeck.enable = false;
   };
   mods = {
+    base_packages.additional_packages = with pkgs; [ streamcontroller ];
     # f to pay respect
     teams.enable = true;
-    coding = {
-      jetbrains = true;
-    };
-    gaming = {
-      enable = true;
-    };
+    coding = { jetbrains = true; };
+    gaming = { enable = true; };
     stylix.colorscheme = "catppuccin-mocha";
     hyprland = {
       no_atomic = true;
@@ -68,22 +60,16 @@ in
         wallpaper = DP-3,/home/${username}/Pictures/backgrounds/shinobu_1080.jpg
         splash = true
       '';
-      extra_autostart = [ "flatpak run com.core447.StreamController -b" ];
+      extra_autostart = [ "flatpak run streamcontroller -b" ];
     };
-    drives.extraDrives = [
-      {
-        name = "drive2";
-        drive = {
-          device = "/dev/disk/by-label/DRIVE2";
-          fsType = "ext4";
-          options = [
-            "noatime"
-            "nodiratime"
-            "discard"
-          ];
-        };
-      }
-    ];
+    drives.extraDrives = [{
+      name = "drive2";
+      drive = {
+        device = "/dev/disk/by-label/DRIVE2";
+        fsType = "ext4";
+        options = [ "noatime" "nodiratime" "discard" ];
+      };
+    }];
     virtualbox.enable = true;
     kde_connect.enable = true;
     xone.enable = true;
@@ -95,10 +81,6 @@ in
       };
     };
     piper.enable = true;
-    flatpak.additional_packages = [ "com.core447.StreamController" ];
-    greetd = {
-      resolution = "3440x1440@180";
-    };
     nextcloud = {
       synclist = [
         {

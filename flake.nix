@@ -4,7 +4,8 @@
   inputs = {
     dashvim.url = "github:DashieTM/DashVim";
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    ironbar.url = "github:JakeStanger/ironbar?ref=3a1c60442382f970cdb7669814b6ef3594d9f048";
+    ironbar.url =
+      "github:JakeStanger/ironbar?ref=3a1c60442382f970cdb7669814b6ef3594d9f048";
     anyrun.url = "github:Kirottu/anyrun";
     nixpkgs.url = "github:NixOs/nixpkgs/nixos-unstable";
     stable.url = "github:NixOs/nixpkgs/nixos-24.05";
@@ -21,23 +22,21 @@
     };
   };
 
-  outputs =
-    { ... }@inputs:
-    {
-      nixosConfigurations = (inputs.dashNix.dashNixLib.build_systems ./.) // {
-        server = inputs.stable.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            pkgs = inputs.dashNix.stablePkgs;
-          };
-          modules = [
-            inputs.dashNix.dashNixInputs.sops-nix.nixosModules.sops
-            inputs.dashNix.dashNixInputs.dashvim.nixosModules.dashvim
-            ./server/configuration.nix
-          ];
+  outputs = { ... }@inputs: {
+    nixosConfigurations = inputs.dashNix.dashNixLib.build_systems // {
+      server = inputs.stable.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          pkgs = inputs.dashNix.stablePkgs;
         };
+        modules = [
+          inputs.dashNix.dashNixInputs.sops-nix.nixosModules.sops
+          inputs.dashNix.dashNixInputs.dashvim.nixosModules.dashvim
+          ./server/configuration.nix
+        ];
       };
     };
+  };
 
   nixConfig = {
     builders-use-substitutes = true;

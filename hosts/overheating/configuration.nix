@@ -1,36 +1,22 @@
-{ config, ... }:
-{
+{ config, ... }: {
   imports = [ ../../common ];
   conf = {
-    monitor = "eDP-1";
-    scale = "2.0";
+    defaultMonitor = "eDP-1";
+    defaultMonitorMode = "2944x1840@90";
+    defaultMonitorScale = "2";
     boot_params = [ "rtc_cmos.use_acpi_alarm=1" ];
-    ironbar.modules = [
-      {
-        type = "upower";
-        class = "memory-usage";
-      }
-    ];
+    ironbar.modules = [{
+      type = "upower";
+      class = "memory-usage";
+    }];
   };
   mods = {
     stylix.colorscheme = "catppuccin-mocha";
-    hyprland = {
-      monitor = [
-        # default
-        "eDP-1,2944x1840@90,0x0,2"
-
-        # all others
-        ",highres,auto,1"
-      ];
-      extra_autostart = [ "hyprdock --server" ];
-    };
+    hyprland = { extra_autostart = [ "hyprdock --server" ]; };
     gpu.amdgpu.enable = true;
     kde_connect.enable = true;
     bluetooth.enable = true;
     acpid.enable = true;
-    greetd = {
-      resolution = "3440x1440@180";
-    };
     nextcloud = {
       synclist = [
         {

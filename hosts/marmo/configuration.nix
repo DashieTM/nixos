@@ -1,9 +1,10 @@
-{ config, ... }:
-{
+{ config, ... }: {
   imports = [ ../../common ];
   # variables for system
   conf = {
-    monitor = "DP-1";
+    defaultMonitor = "DP-1";
+    defaultMonitorMode = "1920x1080@144";
+    defaultMonitorScale = "1";
     cpu = "intel";
   };
   mods = {
@@ -11,30 +12,16 @@
       enable = true;
       gpu_device = 1;
     };
-    stylix.colorscheme = "catppuccin-mocha";
-    hyprland = {
-      no_atomic = true;
-      monitor = [
-        # default
-        "DP-1,1920x1080@144,0x0,1"
-        # all others
-        ",highrr,auto,1"
-      ];
-    };
+    hyprland = { no_atomic = true; };
     gpu.amdgpu.enable = true;
     kde_connect.enable = true;
     xone.enable = true;
-    greetd = {
-      resolution = "3440x1440@180";
-    };
     nextcloud = {
-      synclist = [
-        {
-          name = "pw_sync";
-          remote = "/PWs";
-          local = "/home/${config.conf.username}/Music";
-        }
-      ];
+      synclist = [{
+        name = "pw_sync";
+        remote = "/PWs";
+        local = "/home/${config.conf.username}/Music";
+      }];
     };
   };
 }

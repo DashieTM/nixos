@@ -23,7 +23,7 @@
   };
 
   outputs = { ... }@inputs: {
-    nixosConfigurations = inputs.dashNix.dashNixLib.build_systems // {
+    nixosConfigurations = inputs.dashNix.dashNixLib.build_systems ./. // {
       server = inputs.stable.lib.nixosSystem {
         specialArgs = {
           inherit inputs;

@@ -263,7 +263,7 @@
         "dirtyRev": "3adbcfab59211c0a6b7879aa7a0c65b115425e5c-dirty",
         "dirtyShortRev": "3adbcfa-dirty",
         "lastModified": 1726242982,
-        "narHash": "sha256-jNKN5IDONGErt/r7hl61J7yIZv353UJA4hldBUGm6os=",
+        "narHash": "sha256-xyYOxUt2VNPlKKv9c+ryy3gDh2fDJot9Kv8I0ObccBs=",
         "type": "git",
         "url": "file:///home/dashie/gits/dashnix"
       },

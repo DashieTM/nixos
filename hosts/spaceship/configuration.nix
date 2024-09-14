@@ -120,7 +120,7 @@ in
         {
           name = "pw_sync";
           remote = "PWs";
-          local = "/home/${config.conf.username}/Music";
+          local = "/home/${config.conf.username}/pws";
         }
       ];
     };

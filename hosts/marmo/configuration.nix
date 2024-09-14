@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   imports = [ ../../common ];
   # variables for system
   conf = {
@@ -12,16 +13,20 @@
       enable = true;
       gpu_device = 1;
     };
-    hyprland = { no_atomic = true; };
+    hyprland = {
+      no_atomic = true;
+    };
     gpu.amdgpu.enable = true;
     kde_connect.enable = true;
     xone.enable = true;
     nextcloud = {
-      synclist = [{
-        name = "pw_sync";
-        remote = "/PWs";
-        local = "/home/${config.conf.username}/Music";
-      }];
+      synclist = [
+        {
+          name = "pw_sync";
+          remote = "/PWs";
+          local = "/home/${config.conf.username}/pws";
+        }
+      ];
     };
   };
 }

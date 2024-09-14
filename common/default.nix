@@ -1,11 +1,16 @@
-{ config, ... }: {
+{ config, ... }:
+{
   config.mods = {
-    sops.secrets = {
-      hub = { };
-      lab = { };
-      ${config.conf.username} = { };
-      nextcloud = { };
-      access = { };
+    sops = {
+      sopsPath = "/home/${config.conf.username}/pws/secrets.yaml";
+      validateSopsFile = false;
+      secrets = {
+        hub = { };
+        lab = { };
+        ${config.conf.username} = { };
+        nextcloud = { };
+        access = { };
+      };
     };
   };
 }

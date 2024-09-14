@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
-let username = config.conf.username;
-in {
+let
+  username = config.conf.username;
+in
+{
   imports = [ ../../common ];
 
   # config variables
@@ -11,14 +13,25 @@ in {
     streamdeck.enable = false;
   };
   mods = {
-    base_packages.additional_packages = with pkgs; [ streamcontroller ];
+
+    basePackages.additionalPackages = with pkgs; [ streamcontroller ];
     # f to pay respect
     teams.enable = true;
-    coding = { jetbrains = true; };
-    gaming = { enable = true; };
+    coding = {
+      jetbrains = true;
+      vscodium = {
+        enable = true;
+        extensions = with pkgs.vscode-extensions; [
+          ionide.ionide-fsharp
+        ];
+      };
+    };
+    gaming = {
+      enable = true;
+    };
     stylix.colorscheme = "catppuccin-mocha";
     hyprland = {
-      no_atomic = true;
+      noAtomic = true;
       monitor = [
         # default
         "DP-2,2560x1440@165,0x0,1"
@@ -60,18 +73,24 @@ in {
         wallpaper = DP-3,/home/${username}/Pictures/backgrounds/shinobu_1080.jpg
         splash = true
       '';
-      extra_autostart = [ "flatpak run streamcontroller -b" ];
+      extraAutostart = [ "flatpak run streamcontroller -b" ];
     };
-    drives.extraDrives = [{
-      name = "drive2";
-      drive = {
-        device = "/dev/disk/by-label/DRIVE2";
-        fsType = "ext4";
-        options = [ "noatime" "nodiratime" "discard" ];
-      };
-    }];
+    drives.extraDrives = [
+      {
+        name = "drive2";
+        drive = {
+          device = "/dev/disk/by-label/DRIVE2";
+          fsType = "ext4";
+          options = [
+            "noatime"
+            "nodiratime"
+            "discard"
+          ];
+        };
+      }
+    ];
     virtualbox.enable = true;
-    kde_connect.enable = true;
+    kdeConnect.enable = true;
     xone.enable = true;
     gpu = {
       amdgpu.enable = true;

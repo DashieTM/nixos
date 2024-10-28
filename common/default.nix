@@ -10,6 +10,7 @@
         ${config.conf.username} = { };
         nextcloud = { };
         access = { };
+        terra = { };
       };
     };
   };

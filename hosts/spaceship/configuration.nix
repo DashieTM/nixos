@@ -1,4 +1,8 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  ...
+}:
 let
   username = config.conf.username;
 in
@@ -13,7 +17,9 @@ in
     streamdeck.enable = false;
   };
   mods = {
-
+    podman.enable = true;
+    browser.firefox.enable = true;
+    browser.brave.enable = true;
     basePackages.additionalPackages = with pkgs; [ streamcontroller ];
     # f to pay respect
     teams.enable = true;

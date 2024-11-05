@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  config.mods = {
+  mods = {
     sops = {
       sopsPath = "/home/${config.conf.username}/pws/secrets.yaml";
       validateSopsFile = false;

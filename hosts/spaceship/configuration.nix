@@ -17,7 +17,7 @@ in
     streamdeck.enable = false;
   };
   mods = {
-    podman.enable = true;
+    containers.variant = "podman";
     browser.firefox.enable = true;
     browser.brave.enable = true;
     basePackages.additionalPackages = with pkgs; [ streamcontroller ];

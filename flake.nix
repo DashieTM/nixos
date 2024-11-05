@@ -4,7 +4,7 @@
   inputs = {
     #dashvim.url = "github:DashieTM/DashVim";
     dashvim.url = "git+file:///home/dashie/gits/dashvim";
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=3852418d2446555509738bf1486940042107afe7";
     ironbar.url = "github:JakeStanger/ironbar?ref=3a1c60442382f970cdb7669814b6ef3594d9f048";
     anyrun.url = "github:Kirottu/anyrun";
     nixpkgs.url = "github:NixOs/nixpkgs/nixos-unstable";
